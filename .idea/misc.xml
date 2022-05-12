@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/login_activity.xml" value="0.2" />
+        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/confirmation_request.xml" value="0.1" />
+        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/login_activity.xml" value="0.264" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/signup_activity.xml" value="0.176" />
         <entry key="..\:/Users/noono/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/login_activity.xml" value="0.1933876811594203" />
         <entry key="..\:/Users/noono/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/signup_activity.xml" value="0.1933876811594203" />

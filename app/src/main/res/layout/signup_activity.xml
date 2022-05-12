@@ -6,5 +6,84 @@
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".view.SignupActivity">
+	tools:context=".view.SignupActivity"
+	android:background="#2C2C2C">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		android:orientation="vertical"
+		android:gravity="center">
+		<com.google.android.material.textfield.TextInputLayout
+			style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="30dp"
+			android:layout_marginTop="0dp"
+			android:layout_marginEnd="30dp"
+			app:boxBackgroundColor="#6E6C6E"
+			android:hint="Email"
+			app:hintTextColor="#FFFFFF"
+			app:boxStrokeColor="#6C6E6C"
+			app:boxCornerRadiusBottomEnd="8dp"
+			app:boxCornerRadiusTopEnd="8dp"
+			app:boxCornerRadiusBottomStart="8dp"
+			app:boxCornerRadiusTopStart="8dp">
+
+			<!--this is the actual edit text which takes the input-->
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/signup_email"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textColor="#FFFFFF"/>
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<com.google.android.material.textfield.TextInputLayout
+			style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="30dp"
+			android:layout_marginTop="15dp"
+			android:layout_marginEnd="30dp"
+			android:hint="Password"
+			app:hintTextColor="#FFFFFF"
+			app:boxStrokeColor="#6E6C6E"
+			app:endIconMode="password_toggle"
+			app:boxCornerRadiusBottomEnd="8dp"
+			app:boxCornerRadiusTopEnd="8dp"
+			app:boxCornerRadiusBottomStart="8dp"
+			app:boxCornerRadiusTopStart="8dp"
+			app:boxBackgroundColor="#6E6C6E">
+
+			<!--this is the actual edit text which takes the input-->
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/signup_password"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="textPassword"
+				android:textColor="#FFFFFF"/>
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/real_sign_up"
+			style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="30dp"
+			android:layout_marginTop="20dp"
+			android:layout_marginEnd="30dp"
+			android:height="55dp"
+			android:text="Sign Up"
+			android:textColor="#FFFFFF"
+			app:rippleColor="#494747"
+			app:cornerRadius="10dp"
+			app:strokeColor="#6C6E6C"
+			/>
+	</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
