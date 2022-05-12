@@ -14,7 +14,7 @@
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		android:background="#3A3A3A"
+		android:background="#494848"
 		app:menu="@menu/bottom_navigation_menu"
 		app:itemTextColor="@color/bottom_nav_color"
 		app:itemIconTint="@color/bottom_nav_color"/>
