@@ -3,6 +3,7 @@ package com.example.library_management_system.view
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,8 @@ import com.example.library_management_system.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 
 class LoginActivity : AppCompatActivity() {
@@ -21,6 +24,22 @@ class LoginActivity : AppCompatActivity() {
 		setContentView(R.layout.login_activity)
 		mAuth = FirebaseAuth.getInstance()
 
+		var db = FirebaseFirestore.getInstance()
+		var docRef = db.collection("Users").document("Haroon")
+		docRef.get().addOnCompleteListener { task ->
+			if (task.isSuccessful) {
+				var doc = task.result
+				if (doc.exists()) {
+					Log.d("Document: ", doc.data.toString())
+				}
+				else {
+					Log.d("Document: ", "No Data Exists")
+				}
+			} else {
+
+			}
+		}
+
 		findViewById<Button>(R.id.sign_up).setOnClickListener {
 			var intent = Intent(this, SignupActivity::class.java)
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -31,8 +50,7 @@ class LoginActivity : AppCompatActivity() {
 			var intent = Intent(this, Dashboard::class.java)
 			var email = findViewById<TextInputEditText>(R.id.login_email).text.toString()
 			var password = findViewById<TextInputEditText>(R.id.login_password).text.toString()
-			if (TextUtils.isEmpty(email) &&
-					TextUtils.isEmpty(password)) {
+			if (TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
 				Toast.makeText(this, "Please Enter Email and Password", Toast.LENGTH_LONG).show()
 			}
 			else if (TextUtils.isEmpty(email)) {

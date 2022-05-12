@@ -11,6 +11,8 @@ import com.example.library_management_system.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
 class SignupActivity : AppCompatActivity() {
 
@@ -31,16 +33,9 @@ class SignupActivity : AppCompatActivity() {
 		findViewById<MaterialButton>(R.id.real_sign_up).setOnClickListener {
 			var email = findViewById<TextInputEditText>(R.id.signup_email).text.toString()
 			var password = findViewById<TextInputEditText>(R.id.signup_password).text.toString()
-
-			if (TextUtils.isEmpty(email) &&
-				TextUtils.isEmpty(password)) {
-				Toast.makeText(this, "Please Enter Email and Password", Toast.LENGTH_LONG).show()
-			}
-			else if (TextUtils.isEmpty(email)) {
-				Toast.makeText(this, "Please Enter Email", Toast.LENGTH_LONG).show()
-			}
-			else if (TextUtils.isEmpty(password)) {
-				Toast.makeText(this, "Please Enter Password", Toast.LENGTH_LONG).show()
+			var name = findViewById<TextInputEditText>(R.id.sign_up_name).text.toString()
+			if (TextUtils.isEmpty(email) && TextUtils.isEmpty(password) && TextUtils.isEmpty(name)) {
+				Toast.makeText(this, "Please Enter Credentials", Toast.LENGTH_LONG).show()
 			}
 			else {
 				mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener	 { task ->
@@ -48,6 +43,19 @@ class SignupActivity : AppCompatActivity() {
 						Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_LONG).show()
 						var intent = Intent(this, Dashboard::class.java)
 						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+						var db =  FirebaseFirestore.getInstance()
+
+						val user = hashMapOf(
+							"Email" to email,
+							"Name" to name,
+							"Type" to "User"
+						)
+
+						db.collection("Users").document(name).set(user, SetOptions.merge())
+							.addOnCompleteListener { Log.d("Document: " ,"Successfully Added") }
+							.addOnFailureListener { Log.d("Document: ", "Error") }
+
 						startActivity(intent)
 					} else {
 						Toast.makeText(this, "Sign Up Failed", Toast.LENGTH_LONG).show()
