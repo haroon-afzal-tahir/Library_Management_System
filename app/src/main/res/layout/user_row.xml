@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="5dp"
+	android:layout_marginBottom="5dp">
+
+	<androidx.cardview.widget.CardView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:cardCornerRadius="15dp"
+		android:layout_marginStart="10dp"
+		app:cardBackgroundColor="#7E7E80"
+		android:layout_marginEnd="10dp">
+		<GridLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:columnCount="2">
+			<ImageView
+				android:layout_margin="10dp"
+				android:src="@drawable/ic_person_80"/>
+			<GridLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:rowCount="2"
+				android:columnCount="1"
+				android:layout_marginTop="5dp"
+				android:layout_marginBottom="5dp">
+				<TextView
+					android:id="@+id/userName"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Name"
+					android:textColor="#FFFFFF"/>
+
+				<GridLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginTop="10dp"
+					android:layout_marginBottom="10dp"
+					android:columnCount="2"
+					android:rowCount="2">
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Total Books Issued: "
+						android:textColor="#FFFFFF" />
+					<TextView
+						android:id="@+id/booksIssued"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="1"
+						android:textColor="#FFFFFF"
+						android:layout_marginStart="10dp"/>
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Total Books Returned: "
+						android:textColor="#FFFFFF" />
+					<TextView
+						android:id="@+id/booksReturned"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="1"
+						android:textColor="#FFFFFF"
+						android:layout_marginStart="10dp"/>
+				</GridLayout>
+			</GridLayout>
+
+		</GridLayout>
+	</androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

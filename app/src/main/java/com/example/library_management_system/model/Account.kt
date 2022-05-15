@@ -6,9 +6,12 @@ import java.util.concurrent.TimeUnit
 
 class Account {
 	private var borrowedBooks: Int = 0
+	private var totalBooksOrdered: Int = 0
 
 	fun setBorrowedBooks(borrowedBooks: Int) { this.borrowedBooks = borrowedBooks }
+	fun setTotalBooksOrdered(totalBooksOrdered: Int) { this.totalBooksOrdered = totalBooksOrdered }
 	fun getBorrowedBooks() : Int { return borrowedBooks }
+	fun getTotalBooksOrdered() : Int { return totalBooksOrdered }
 	fun calculateFine(name: String, bookName: String) : Int {
 		val firebaseFirestore = FirebaseFirestore.getInstance()
 		val info = firebaseFirestore.collection("Account").document(name)

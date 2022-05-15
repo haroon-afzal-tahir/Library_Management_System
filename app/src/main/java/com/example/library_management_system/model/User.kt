@@ -1,5 +1,6 @@
 package com.example.library_management_system.model
 
+import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -14,6 +15,7 @@ class User(email: String, name: String, type: String) {
 	fun getEmail() : String { return email }
 	fun getName() : String { return name }
 	fun getType() : String { return type }
+	fun getAccount() : Account { return account }
 
 	fun setEmail(email: String) { this.email = email }
 	fun setName(name: String) { this.name = name }
@@ -24,10 +26,16 @@ class User(email: String, name: String, type: String) {
 		this.name = name
 		this.type = type
 
+		account = Account()
+
 		val db = (FirebaseFirestore.getInstance()).collection("Account").document(name)
 
 		db.get().addOnSuccessListener { task ->
 			account.setBorrowedBooks((task.get("Borrowed Books") as Map<String, Timestamp>).size)
+			account.setTotalBooksOrdered(task.get("Total Books Ordered").toString().toInt())
+
+			Log.d("Borrowed Books", account.getBorrowedBooks().toString())
+			Log.d("Total Books", account.getTotalBooksOrdered().toString())
 		}
 	}
 }

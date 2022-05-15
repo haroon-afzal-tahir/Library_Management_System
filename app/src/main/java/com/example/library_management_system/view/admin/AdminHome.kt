@@ -10,16 +10,43 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.library_management_system.HomeFragment
 import com.example.library_management_system.LibrarianFragment
 import com.example.library_management_system.R
 import com.example.library_management_system.UserFragment
+import com.example.library_management_system.adapter.UserViewAdapter
+import com.example.library_management_system.model.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.firestore.FirebaseFirestore
 
 class AdminHome : AppCompatActivity() {
+
+//	private lateinit var recyclerView: RecyclerView
+//	private lateinit var myAdapter: UserViewAdapter
+
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.admin_home)
+
+
+//		recyclerView = findViewById(R.id.userView)
+//
+//
+//		var usersList: ArrayList<User> = ArrayList()
+//
+//		FirebaseFirestore.getInstance().collection("Users").whereEqualTo("Type", "User").get().addOnSuccessListener { documents ->
+//			for (document in documents) {
+//				usersList.add(document.toObject(User::class.java))
+//			}
+//		}
+//
+//		myAdapter = UserViewAdapter(this, usersList)
+//		recyclerView.adapter = myAdapter
+//		recyclerView.layoutManager = LinearLayoutManager(this)
+
 		replaceFragment(HomeFragment())
 
 		findViewById<BottomNavigationView>(R.id.bottomNavigationView).setOnItemSelectedListener { item ->

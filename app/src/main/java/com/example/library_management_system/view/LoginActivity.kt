@@ -20,7 +20,6 @@ import com.google.firebase.ktx.Firebase
 class LoginActivity : AppCompatActivity() {
 //	https://console.firebase.google.com/u/0/project/library-management-syste-842a9/database/library-management-syste-842a9-default-rtdb/data/~2F
 	private lateinit var mAuth: FirebaseAuth
-	private lateinit var user: User
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.login_activity)
