@@ -8,17 +8,19 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.library_management_system.R
+import com.example.library_management_system.model.User
 import com.example.library_management_system.view.admin.AdminHome
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 
 class LoginActivity : AppCompatActivity() {
 //	https://console.firebase.google.com/u/0/project/library-management-syste-842a9/database/library-management-syste-842a9-default-rtdb/data/~2F
 	private lateinit var mAuth: FirebaseAuth
-
+	private lateinit var user: User
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.login_activity)
@@ -31,7 +33,9 @@ class LoginActivity : AppCompatActivity() {
 				var doc = task.result
 				if (doc.exists()) {
 					Log.d("Document: ", doc.data.toString())
-					Log.d("Name: ", doc.get("Name").toString())
+					Log.d("Name", doc.get("Name").toString())
+					Log.d("Email", doc.get("Email").toString())
+					Log.d("Type", doc.get("Type").toString())
 				}
 				else {
 					Log.d("Document: ", "No Data Exists")
@@ -64,13 +68,32 @@ class LoginActivity : AppCompatActivity() {
 				mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener	 { task ->
 					if (task.isSuccessful) {
 						Toast.makeText(this,"Login Successful", Toast.LENGTH_LONG).show()
-						startActivity(intent)
+						docRef.get().addOnSuccessListener { document ->
+							if (document != null) {
+								if (email == document.get("Email").toString()) {
+									// This means the user is admin
+									startActivity(intent)
+								}
+								else {
+									// We will get type of the login user
+									if (document.get("Type").toString() == "Librarian") {
+										// Launch Activity of Librarian
+										startActivity(intent)
+									}
+									else {
+										// Launch Activity of User
+										startActivity(intent)
+									}
+								}
+							}
+						}
 					} else {
 						Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show()
 					}
 				}
 			}
 		}
+
 	}
 
 	override fun onStart() {
