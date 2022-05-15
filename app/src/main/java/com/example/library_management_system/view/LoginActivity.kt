@@ -8,11 +8,11 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.library_management_system.R
+import com.example.library_management_system.view.admin.AdminHome
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 
 
 class LoginActivity : AppCompatActivity() {
@@ -31,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
 				var doc = task.result
 				if (doc.exists()) {
 					Log.d("Document: ", doc.data.toString())
+					Log.d("Name: ", doc.get("Name").toString())
 				}
 				else {
 					Log.d("Document: ", "No Data Exists")
@@ -47,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
 		}
 
 		findViewById<MaterialButton>(R.id.sign_in).setOnClickListener {
-			var intent = Intent(this, Dashboard::class.java)
+			var intent = Intent(this, AdminHome::class.java)
 			var email = findViewById<TextInputEditText>(R.id.login_email).text.toString()
 			var password = findViewById<TextInputEditText>(R.id.login_password).text.toString()
 			if (TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
@@ -70,10 +71,10 @@ class LoginActivity : AppCompatActivity() {
 				}
 			}
 		}
-
 	}
 
 	override fun onStart() {
 		super.onStart()
+		supportActionBar?.hide()
 	}
 }

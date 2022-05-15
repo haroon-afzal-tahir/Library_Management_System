@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.library_management_system.R
+import com.example.library_management_system.view.admin.AdminHome
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +18,11 @@ class SignupActivity : AppCompatActivity() {
 
 	private lateinit var mAuth: FirebaseAuth
 
+
+	override fun onStart() {
+		super.onStart()
+		supportActionBar?.hide()
+	}
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.signup_activity)
@@ -41,7 +46,7 @@ class SignupActivity : AppCompatActivity() {
 				mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener	 { task ->
 					if (task.isSuccessful) {
 						Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_LONG).show()
-						var intent = Intent(this, Dashboard::class.java)
+						var intent = Intent(this, AdminHome::class.java)
 						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
 						var db =  FirebaseFirestore.getInstance()

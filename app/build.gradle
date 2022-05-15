@@ -22,6 +22,11 @@ android {
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 		}
 	}
+
+	buildFeatures {
+		viewBinding true
+	}
+
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_8
 		targetCompatibility JavaVersion.VERSION_1_8
@@ -35,6 +40,8 @@ android {
 
 apply plugin: 'com.google.gms.google-services'
 dependencies {
+	def nav_version = "2.4.2"
+
 	implementation platform('com.google.firebase:firebase-bom:30.0.0')
 	implementation 'com.google.firebase:firebase-auth-ktx'
 
@@ -51,4 +58,7 @@ dependencies {
 	androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
 	implementation 'com.google.firebase:firebase-firestore-ktx'
+
+	implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+	implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }

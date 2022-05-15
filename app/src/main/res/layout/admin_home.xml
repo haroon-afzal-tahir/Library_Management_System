@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".view.Dashboard"
+	tools:context=".view.admin.AdminHome"
 	android:background="#2C2C2C">
 
+	<FrameLayout
+		android:id="@+id/fragment"
+		android:name="androidx.navigation.fragment.NavHostFragment"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@+id/bottomNavigationView"
+		app:defaultNavHost="false" />
+
 	<com.google.android.material.bottomnavigation.BottomNavigationView
+		android:id="@+id/bottomNavigationView"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
 		android:background="#494848"
-		app:menu="@menu/bottom_navigation_menu"
+		app:itemIconTint="@color/bottom_nav_color"
 		app:itemTextColor="@color/bottom_nav_color"
-		app:itemIconTint="@color/bottom_nav_color"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+		android:layout_alignParentBottom="true"
+		app:menu="@menu/admin_menu" />
+</RelativeLayout>
