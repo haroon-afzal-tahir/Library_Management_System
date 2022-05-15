@@ -2,30 +2,27 @@ package com.example.library_management_system.model
 
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.concurrent.TimeUnit
 
 class Account {
-	private var borrowed_books: Int = 0
-	private var reserved_books: Int = 0
-	private var returned_books: Int = 0
-	private var lost_books: Int = 0
+	private var borrowedBooks: Int = 0
 
-
-	fun setBorrowedBooks(borrowed_books: Int) { this.borrowed_books = borrowed_books }
-	fun setReservedBooks(reserved_books: Int) { this.reserved_books = reserved_books }
-	fun setReturnedBooks(returned_books: Int) { this.returned_books = returned_books }
-	fun setLostBooks(lost_books: Int) { this.lost_books = lost_books }
-
-	fun getBorrowedBooks() : Int { return borrowed_books }
-	fun getReservedBooks() : Int { return reserved_books }
-	fun getReturnedBooks() : Int { return returned_books }
-	fun getLostBooks() : Int { return lost_books }
-
-	fun calculateFine(name: String) : Int {
-		var firebaseFirestore = FirebaseFirestore.getInstance()
-		var info = firebaseFirestore.collection("Account").document(name)
+	fun setBorrowedBooks(borrowedBooks: Int) { this.borrowedBooks = borrowedBooks }
+	fun getBorrowedBooks() : Int { return borrowedBooks }
+	fun calculateFine(name: String, bookName: String) : Int {
+		val firebaseFirestore = FirebaseFirestore.getInstance()
+		val info = firebaseFirestore.collection("Account").document(name)
+		var days: Long = 0
 		info.get().addOnSuccessListener { task ->
-			task.get("Date of Submission")
+
+			val arrays: Map<String, Timestamp> = task.get("Borrowed Books") as Map<String, Timestamp>
+			val submissionDate = (arrays[bookName] as Timestamp).toDate()
+			val todayDate = Timestamp.now().toDate()
+
+			if (todayDate > submissionDate) {
+				days = TimeUnit.MILLISECONDS.toDays(todayDate.time - submissionDate.time)
+			}
 		}
-		return 0
+		return days.toInt()
 	}
 }
