@@ -5,18 +5,17 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".view.SignupActivity"
+	tools:context=".view.admin.UpdateLibrarian"
 	android:background="#2C2C2C">
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		android:orientation="vertical"
-		android:gravity="center">
+		app:layout_constraintTop_toTopOf="parent">
 
 		<com.google.android.material.textfield.TextInputLayout
 			style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
@@ -32,40 +31,15 @@
 			app:boxCornerRadiusBottomEnd="8dp"
 			app:boxCornerRadiusTopEnd="8dp"
 			app:boxCornerRadiusBottomStart="8dp"
-			app:boxCornerRadiusTopStart="8dp"
-			>
-
-			<!--this is the actual edit text which takes the input-->
-			<com.google.android.material.textfield.TextInputEditText
-				android:id="@+id/sign_up_name"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:textColor="#FFFFFF"/>
-
-		</com.google.android.material.textfield.TextInputLayout>
-
-		<com.google.android.material.textfield.TextInputLayout
-			style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="30dp"
-			android:layout_marginTop="20dp"
-			android:layout_marginEnd="30dp"
-			app:boxBackgroundColor="#6E6C6E"
-			android:hint="Email"
-			app:hintTextColor="#FFFFFF"
-			app:boxStrokeColor="#6C6E6C"
-			app:boxCornerRadiusBottomEnd="8dp"
-			app:boxCornerRadiusTopEnd="8dp"
-			app:boxCornerRadiusBottomStart="8dp"
 			app:boxCornerRadiusTopStart="8dp">
 
 			<!--this is the actual edit text which takes the input-->
 			<com.google.android.material.textfield.TextInputEditText
-				android:id="@+id/signup_email"
+				android:id="@+id/librarian_name"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:textColor="#FFFFFF"/>
+				android:textColor="#FFFFFF"
+				android:editable="false"/>
 
 		</com.google.android.material.textfield.TextInputLayout>
 
@@ -76,7 +50,7 @@
 			android:layout_marginStart="30dp"
 			android:layout_marginTop="15dp"
 			android:layout_marginEnd="30dp"
-			android:hint="Password"
+			android:hint="Old Password"
 			app:hintTextColor="#FFFFFF"
 			app:boxStrokeColor="#6E6C6E"
 			app:endIconMode="password_toggle"
@@ -88,7 +62,33 @@
 
 			<!--this is the actual edit text which takes the input-->
 			<com.google.android.material.textfield.TextInputEditText
-				android:id="@+id/signup_password"
+				android:id="@+id/librarian_old_password"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="textPassword"
+				android:textColor="#FFFFFF"/>
+
+		</com.google.android.material.textfield.TextInputLayout>
+		<com.google.android.material.textfield.TextInputLayout
+			style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="30dp"
+			android:layout_marginTop="15dp"
+			android:layout_marginEnd="30dp"
+			android:hint="New Password"
+			app:hintTextColor="#FFFFFF"
+			app:boxStrokeColor="#6E6C6E"
+			app:endIconMode="password_toggle"
+			app:boxCornerRadiusBottomEnd="8dp"
+			app:boxCornerRadiusTopEnd="8dp"
+			app:boxCornerRadiusBottomStart="8dp"
+			app:boxCornerRadiusTopStart="8dp"
+			app:boxBackgroundColor="#6E6C6E">
+
+			<!--this is the actual edit text which takes the input-->
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/update_librarian_new_password"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:inputType="textPassword"
@@ -96,20 +96,59 @@
 
 		</com.google.android.material.textfield.TextInputLayout>
 
-		<com.google.android.material.button.MaterialButton
-			android:id="@+id/real_sign_up"
-			style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+		<com.google.android.material.textfield.TextInputLayout
+			style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="30dp"
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="15dp"
 			android:layout_marginEnd="30dp"
-			android:height="55dp"
-			android:text="Sign Up"
-			android:textColor="#FFFFFF"
-			app:rippleColor="#494747"
-			app:cornerRadius="10dp"
-			app:strokeColor="#6C6E6C"
-			/>
+			android:hint="Retype New Password"
+			app:hintTextColor="#FFFFFF"
+			app:boxStrokeColor="#6E6C6E"
+			app:endIconMode="password_toggle"
+			app:boxCornerRadiusBottomEnd="8dp"
+			app:boxCornerRadiusTopEnd="8dp"
+			app:boxCornerRadiusBottomStart="8dp"
+			app:boxCornerRadiusTopStart="8dp"
+			app:boxBackgroundColor="#6E6C6E">
+
+			<!--this is the actual edit text which takes the input-->
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/update_librarian_new_retype_password"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="textPassword"
+				android:textColor="#FFFFFF"/>
+
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<GridLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:rowCount="1"
+			android:columnCount="2"
+			android:layout_marginStart="70dp"
+			android:layout_marginEnd="70dp"
+			android:layout_marginTop="10dp">
+
+			<com.google.android.material.button.MaterialButton
+				android:id="@+id/librarian_cancel_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+				android:text="Cancel"
+				android:textColor="#FFFFFF"
+				app:rippleColor="#494747"
+				app:strokeColor="#6C6E6C"
+				android:layout_gravity="left"/>
+
+			<com.google.android.material.button.MaterialButton
+				android:id="@+id/librarian_update_button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Update"
+				android:backgroundTint="#4CAF50"/>
+		</GridLayout>
 	</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

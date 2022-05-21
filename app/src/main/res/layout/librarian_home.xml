@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".view.librarian.LibrarianHome"
+	android:background="#2C2C2C">
+
+	<FrameLayout
+		android:id="@+id/librarian_fragment"
+		android:name="androidx.navigation.fragment.NavHostFragment"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:defaultNavHost="true"/>
+
+	<com.google.android.material.bottomnavigation.BottomNavigationView
+		android:id="@+id/librarian_home_bottom_navigation_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="#494848"
+		app:itemIconTint="@color/bottom_nav_color"
+		app:itemTextColor="@color/bottom_nav_color"
+		android:layout_alignParentBottom="true"
+		app:menu="@menu/librarian_menu" />
+
+</RelativeLayout>

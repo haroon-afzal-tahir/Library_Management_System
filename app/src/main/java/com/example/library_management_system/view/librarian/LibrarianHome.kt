@@ -1,30 +1,27 @@
-package com.example.library_management_system.view.admin
+package com.example.library_management_system.view.librarian
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.library_management_system.HomeFragment
-import com.example.library_management_system.LibrarianFragment
+import com.example.library_management_system.FragmentLibrarianUserFragment
+import com.example.library_management_system.Librarian_Home_Fragment
 import com.example.library_management_system.R
-import com.example.library_management_system.UserFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class AdminHome : AppCompatActivity() {
+class LibrarianHome : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.admin_home)
+		setContentView(R.layout.librarian_home)
 
-		replaceFragment(HomeFragment())
+		replaceFragment(Librarian_Home_Fragment())
 
-		findViewById<BottomNavigationView>(R.id.bottomNavigationView).setOnItemSelectedListener { item ->
+		findViewById<BottomNavigationView>(R.id.librarian_home_bottom_navigation_view).setOnItemSelectedListener { item ->
 			when(item.itemId) {
-				R.id.fragment_home -> replaceFragment(HomeFragment())
-				R.id.fragment_librarian -> replaceFragment(LibrarianFragment())
-				R.id.fragment_user -> replaceFragment(UserFragment())
+				R.id.librarian_fragment_home -> replaceFragment(Librarian_Home_Fragment())
+				R.id.librarian_fragment_user -> replaceFragment(FragmentLibrarianUserFragment())
 				else -> return@setOnItemSelectedListener false
 			}
 		}
-
 	}
 
 	override fun onStart() {
@@ -35,7 +32,7 @@ class AdminHome : AppCompatActivity() {
 	private fun replaceFragment(fragment: Fragment) : Boolean {
 		val fragmentManager = supportFragmentManager
 		val fragmentTransaction = fragmentManager.beginTransaction()
-		fragmentTransaction.replace(R.id.fragment, fragment)
+		fragmentTransaction.replace(R.id.librarian_fragment, fragment)
 		fragmentTransaction.commit()
 		return true
 	}

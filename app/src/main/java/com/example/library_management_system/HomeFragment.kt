@@ -5,9 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.library_management_system.adapter.UserViewAdapter
+import com.example.library_management_system.adapter.AdminHomeUserViewAdapter
 import com.example.library_management_system.model.User
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -26,8 +27,8 @@ class HomeFragment : Fragment() {
 	private var param1: String? = null
 	private var param2: String? = null
 
-	private lateinit var recyclerView: RecyclerView
-	private lateinit var myAdapter: UserViewAdapter
+	private var userView: RecyclerView? = null
+	private var librarianView: RecyclerView? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -42,22 +43,46 @@ class HomeFragment : Fragment() {
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		var view = inflater.inflate(R.layout.fragment_home, container, false)
+		return inflater.inflate(R.layout.fragment_home, container, false)
+	}
 
-		recyclerView = view.findViewById(R.id.userView)
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
 
-		var usersList: ArrayList<User> = ArrayList()
 
-		FirebaseFirestore.getInstance().collection("Users").whereEqualTo("Type", "User").get().addOnSuccessListener { documents ->
-			for (document in documents) {
-				usersList.add(User(document.get("Email").toString(), document.get("Name").toString(), document.get("Type").toString()))
+		val usersList: ArrayList<User> = ArrayList()
+		val librariansList: ArrayList<User> = ArrayList()
+
+		FirebaseFirestore.getInstance().collection("Users").whereEqualTo("Type", "User").get().addOnCompleteListener { task ->
+			if (task.isSuccessful) {
+				val doc = task.result
+				if (doc.documents.isNotEmpty()) {
+					for (document in doc.documents) {
+						usersList.add(User(document.get("Email").toString(), document.get("Name").toString(), document.get("Type").toString()))
+					}
+				}
+				userView = getView()?.findViewById(R.id.userView)
+				userView?.adapter = AdminHomeUserViewAdapter(getView()?.context, usersList)
+				userView?.layoutManager = LinearLayoutManager(getView()?.context)
+			}
+			else {
+
 			}
 		}
 
-		recyclerView.adapter = UserViewAdapter(view.context, usersList)
-		recyclerView.layoutManager = LinearLayoutManager(view.context)
-
-		return view
+		FirebaseFirestore.getInstance().collection("Users").whereEqualTo("Type", "Librarian").get().addOnCompleteListener { task ->
+			if (task.isSuccessful) {
+				val doc = task.result
+				if (doc.documents.isNotEmpty()) {
+					for (document in doc.documents) {
+						librariansList.add(User(document.get("Email").toString(), document.get("Name").toString(), "Librarian"))
+					}
+				}
+				librarianView = getView()?.findViewById(R.id.librariansView)
+				librarianView?.adapter = AdminHomeUserViewAdapter(getView()?.context, librariansList)
+				librarianView?.layoutManager = LinearLayoutManager(getView()?.context)
+			}
+		}
 	}
 
 	companion object {

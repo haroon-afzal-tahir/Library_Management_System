@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginTop="5dp"
@@ -10,66 +11,102 @@
 	<androidx.cardview.widget.CardView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		app:cardCornerRadius="15dp"
-		android:layout_marginStart="10dp"
 		app:cardBackgroundColor="#7E7E80"
-		android:layout_marginEnd="10dp">
-		<GridLayout
+		app:cardCornerRadius="15dp"
+		app:layout_constraintStart_toStartOf="parent"
+		android:layout_margin="10dp"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<RelativeLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:columnCount="2">
+			android:layout_margin="5dp">
+
 			<ImageView
-				android:layout_margin="10dp"
-				android:src="@drawable/ic_person_80"/>
-			<GridLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:rowCount="2"
-				android:columnCount="1"
-				android:layout_marginTop="5dp"
-				android:layout_marginBottom="5dp">
+				android:id="@+id/imageView1"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentStart="true"
+				android:layout_alignParentEnd="false"
+				android:src="@drawable/ic_person_80" />
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignTop="@+id/imageView1"
+				android:layout_alignBottom="@+id/imageView1"
+				android:layout_alignParentEnd="false"
+				android:layout_marginStart="17dp"
+				android:layout_toEndOf="@+id/imageView1"
+				android:orientation="vertical">
+
 				<TextView
 					android:id="@+id/userName"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:gravity="center"
 					android:text="Name"
-					android:textColor="#FFFFFF"/>
+					android:textColor="#FFFFFF"
+					app:layout_constraintStart_toEndOf="@+id/imageView1"
+					tools:layout_editor_absoluteY="16dp" />
 
-				<GridLayout
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:layout_marginTop="10dp"
-					android:layout_marginBottom="10dp"
-					android:columnCount="2"
-					android:rowCount="2">
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal">
+
 					<TextView
+						android:id="@+id/user_row_books_issued"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:gravity="center"
 						android:text="Total Books Issued: "
-						android:textColor="#FFFFFF" />
+						android:textColor="#FFFFFF"
+						app:layout_constraintStart_toStartOf="@+id/userName"
+						app:layout_constraintTop_toBottomOf="@+id/userName" />
+
 					<TextView
 						android:id="@+id/booksIssued"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:gravity="center"
 						android:text="1"
 						android:textColor="#FFFFFF"
-						android:layout_marginStart="10dp"/>
+						app:layout_constraintBottom_toBottomOf="@+id/user_row_books_issued"
+						app:layout_constraintStart_toEndOf="@+id/user_row_books_issued"
+						app:layout_constraintTop_toTopOf="@+id/user_row_books_issued" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal">
+
 					<TextView
+						android:id="@+id/textView2"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:gravity="center"
 						android:text="Total Books Returned: "
-						android:textColor="#FFFFFF" />
+						android:textColor="#FFFFFF"
+						app:layout_constraintStart_toStartOf="@+id/user_row_books_issued"
+						app:layout_constraintTop_toBottomOf="@+id/user_row_books_issued" />
+
 					<TextView
 						android:id="@+id/booksReturned"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:gravity="center"
 						android:text="1"
 						android:textColor="#FFFFFF"
-						android:layout_marginStart="10dp"/>
-				</GridLayout>
-			</GridLayout>
+						app:layout_constraintBottom_toBottomOf="@+id/textView2"
+						app:layout_constraintStart_toEndOf="@+id/textView2"
+						app:layout_constraintTop_toTopOf="@+id/textView2" />
+				</LinearLayout>
 
-		</GridLayout>
+			</LinearLayout>
+
+		</RelativeLayout>
 	</androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

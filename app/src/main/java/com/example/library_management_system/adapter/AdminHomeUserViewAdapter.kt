@@ -4,15 +4,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.library_management_system.R
 import com.example.library_management_system.model.User
+import com.google.firebase.firestore.FirebaseFirestore
 
-class UserViewAdapter(ct: Context, user: ArrayList<User>) : RecyclerView.Adapter<UserViewAdapter.MyViewHolder>() {
+class AdminHomeUserViewAdapter(ct: Context?, user: ArrayList<User>) : RecyclerView.Adapter<AdminHomeUserViewAdapter.MyViewHolder>() {
 	class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-	private var context: Context = ct
+	private var context: Context? = ct
 	private var users: ArrayList<User> = ArrayList()
 	private var usersAll: ArrayList<User> = ArrayList()
 

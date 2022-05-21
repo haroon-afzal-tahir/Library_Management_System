@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.library_management_system.R
+import com.example.library_management_system.helper.InsertDataIntoFirestore
 import com.example.library_management_system.view.admin.AdminHome
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -43,27 +44,28 @@ class SignupActivity : AppCompatActivity() {
 				Toast.makeText(this, "Please Enter Credentials", Toast.LENGTH_LONG).show()
 			}
 			else {
-				mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener	 { task ->
-					if (task.isSuccessful) {
-						Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_LONG).show()
-						var intent = Intent(this, AdminHome::class.java)
-						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+				if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 
-						var db =  FirebaseFirestore.getInstance()
+					mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener { task ->
+						val isNewUser : Boolean? = task.result.signInMethods?.isEmpty()
+						if (isNewUser == true) {
+							mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener	 { task1 ->
+								if (task1.isSuccessful) {
+									Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_LONG).show()
+									val intent = Intent(this, AdminHome::class.java)
+									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
-						val user = hashMapOf(
-							"Email" to email,
-							"Name" to name,
-							"Type" to "User"
-						)
+									InsertDataIntoFirestore().insertUser(email, name, password, "User")
 
-						db.collection("Users").document(name).set(user, SetOptions.merge())
-							.addOnCompleteListener { Log.d("Document: " ,"Successfully Added") }
-							.addOnFailureListener { Log.d("Document: ", "Error") }
-
-						startActivity(intent)
-					} else {
-						Toast.makeText(this, "Sign Up Failed", Toast.LENGTH_LONG).show()
+									startActivity(intent)
+								} else {
+									Toast.makeText(this, "Sign Up Failed", Toast.LENGTH_LONG).show()
+								}
+							}
+						}
+						else {
+							Toast.makeText(this, "This User Already Has an Account", Toast.LENGTH_SHORT).show()
+						}
 					}
 				}
 			}

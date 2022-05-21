@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.library_management_system.R
 import com.example.library_management_system.model.User
 import com.example.library_management_system.view.admin.AdminHome
+import com.example.library_management_system.view.librarian.LibrarianHome
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -25,11 +26,10 @@ class LoginActivity : AppCompatActivity() {
 		setContentView(R.layout.login_activity)
 		mAuth = FirebaseAuth.getInstance()
 
-		var db = FirebaseFirestore.getInstance()
-		var docRef = db.collection("Users").document("Haroon")
-		docRef.get().addOnCompleteListener { task ->
+		var docRef = FirebaseFirestore.getInstance().collection("Users").document("Haroon1")
+			docRef.get().addOnCompleteListener { task ->
 			if (task.isSuccessful) {
-				var doc = task.result
+				val doc = task.result
 				if (doc.exists()) {
 					Log.d("Document: ", doc.data.toString())
 					Log.d("Name", doc.get("Name").toString())
@@ -39,8 +39,6 @@ class LoginActivity : AppCompatActivity() {
 				else {
 					Log.d("Document: ", "No Data Exists")
 				}
-			} else {
-
 			}
 		}
 
@@ -51,7 +49,6 @@ class LoginActivity : AppCompatActivity() {
 		}
 
 		findViewById<MaterialButton>(R.id.sign_in).setOnClickListener {
-			var intent = Intent(this, AdminHome::class.java)
 			var email = findViewById<TextInputEditText>(R.id.login_email).text.toString()
 			var password = findViewById<TextInputEditText>(R.id.login_password).text.toString()
 			if (TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
@@ -65,29 +62,41 @@ class LoginActivity : AppCompatActivity() {
 			}
 			else {
 				mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener	 { task ->
-					if (task.isSuccessful) {
-						Toast.makeText(this,"Login Successful", Toast.LENGTH_LONG).show()
-						docRef.get().addOnSuccessListener { document ->
-							if (document != null) {
-								if (email == document.get("Email").toString()) {
-									// This means the user is admin
-									startActivity(intent)
-								}
-								else {
-									// We will get type of the login user
-									if (document.get("Type").toString() == "Librarian") {
-										// Launch Activity of Librarian
+					val db = FirebaseFirestore.getInstance()
+					db.collection("Users").whereEqualTo("Email", email).get().addOnSuccessListener {  task1 ->
+						if (task1.documents.isEmpty()) {
+							Toast.makeText(this, "This User is not in the database", Toast.LENGTH_SHORT).show()
+						}
+						else if (task.isSuccessful) {
+							Toast.makeText(this,"Login Successful", Toast.LENGTH_LONG).show()
+							docRef.get().addOnSuccessListener { document ->
+								if (document != null) {
+									if (email == document.get("Email").toString()) {
+										// This means the user is admin
+										val intent = Intent(this, AdminHome::class.java)
 										startActivity(intent)
 									}
 									else {
-										// Launch Activity of User
-										startActivity(intent)
+										FirebaseFirestore.getInstance().collection("Users").whereEqualTo("Email", email).get().addOnSuccessListener { task2 ->
+											val db1 = task2.documents
+											// We will get type of the login user
+											if (db1[0].get("Type").toString() == "Librarian") {
+												// Launch Activity of Librarian
+												val intent = Intent(this, LibrarianHome::class.java)
+												startActivity(intent)
+											}
+											else {
+												// Launch Activity of User
+												val intent = Intent(this, AdminHome::class.java)
+												startActivity(intent)
+											}
+										}
 									}
 								}
 							}
+						} else {
+							Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show()
 						}
-					} else {
-						Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show()
 					}
 				}
 			}

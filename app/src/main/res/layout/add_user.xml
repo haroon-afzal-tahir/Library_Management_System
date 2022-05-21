@@ -5,8 +5,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".view.SignupActivity"
-	android:background="#2C2C2C">
+	android:background="#2C2C2C"
+	tools:context=".view.admin.AddLibrarian">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -37,7 +37,7 @@
 
 			<!--this is the actual edit text which takes the input-->
 			<com.google.android.material.textfield.TextInputEditText
-				android:id="@+id/sign_up_name"
+				android:id="@+id/user_sign_up_name"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:textColor="#FFFFFF"/>
@@ -62,7 +62,7 @@
 
 			<!--this is the actual edit text which takes the input-->
 			<com.google.android.material.textfield.TextInputEditText
-				android:id="@+id/signup_email"
+				android:id="@+id/user_signup_email"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:textColor="#FFFFFF"/>
@@ -88,7 +88,7 @@
 
 			<!--this is the actual edit text which takes the input-->
 			<com.google.android.material.textfield.TextInputEditText
-				android:id="@+id/signup_password"
+				android:id="@+id/user_signup_password"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:inputType="textPassword"
@@ -97,7 +97,7 @@
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.button.MaterialButton
-			android:id="@+id/real_sign_up"
+			android:id="@+id/add_user_add_user"
 			style="@style/Widget.MaterialComponents.Button.OutlinedButton"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -105,11 +105,12 @@
 			android:layout_marginTop="20dp"
 			android:layout_marginEnd="30dp"
 			android:height="55dp"
-			android:text="Sign Up"
+			android:text="Add User"
 			android:textColor="#FFFFFF"
 			app:rippleColor="#494747"
 			app:cornerRadius="10dp"
 			app:strokeColor="#6C6E6C"
 			/>
 	</LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

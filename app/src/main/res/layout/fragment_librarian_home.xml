@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#2C2C2C"
+	tools:context=".Librarian_Home_Fragment">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<com.google.android.material.card.MaterialCardView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:cardBackgroundColor="#4CAF50"
+			app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CardView">
+			<GridLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginStart="20dp"
+				android:layout_marginEnd="20dp"
+				android:layout_marginBottom="20dp"
+				android:rowCount="3"
+				android:columnCount="1">
+
+				<GridLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:rowCount="1"
+					android:layout_margin="10dp"
+					android:columnCount="2">
+					<Button
+						android:drawableLeft="@drawable/ic_menu"
+						android:layout_height="wrap_content"
+						android:layout_width="58dp"
+						style="@style/Widget.AppCompat.Button.Borderless"/>
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Maroon"
+						android:textColor="#FFFFFF"
+						android:textSize="18dp"
+						android:textAlignment="center"
+						android:layout_marginLeft="5dp"/>
+
+				</GridLayout>
+
+				<SearchView
+					android:id="@+id/fragment_librarian_home_search_view"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@drawable/bg_white_rounded"
+					android:iconifiedByDefault="false"
+					android:queryHint="Search here" />
+
+			</GridLayout>
+		</com.google.android.material.card.MaterialCardView>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Users"
+			android:textColor="#FFFFFF"
+			android:textSize="20sp"
+			android:layout_marginStart="20dp"
+			android:layout_marginTop="20dp"/>
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/userView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="20dp"/>
+	</LinearLayout>
+
+</FrameLayout>
