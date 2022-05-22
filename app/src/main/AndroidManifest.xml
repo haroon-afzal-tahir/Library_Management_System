@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<uses-permission android:name="android.permission.INTERNET" />
+
 	<application
 		android:allowBackup="true"
 		android:icon="@mipmap/ic_launcher"
@@ -9,27 +10,38 @@
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:theme="@style/Theme.Library_Management_System">
-		<activity
+		<activity android:hardwareAccelerated="true"
 			android:name=".view.LoginActivity"
 			android:exported="true">
-			<intent-filter>
+			<intent-filter >
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".view.SignupActivity"
+		<activity android:hardwareAccelerated="false"
+			android:name=".view.SignupActivity"
 			android:exported="true"/>
-		<activity android:name=".view.admin.AdminHome"
+		<activity android:hardwareAccelerated="false"
+			android:name=".view.admin.AdminHome"
 			android:exported="true"/>
-		<activity android:name=".view.admin.AddLibrarian"
+		<activity android:hardwareAccelerated="false"
+			android:name=".view.admin.AddLibrarian"
 			android:exported="true"/>
-		<activity android:name=".view.admin.AddUser"
+		<activity android:hardwareAccelerated="false"
+			android:name=".view.admin.AddUser"
 			android:exported="true"/>
-		<activity android:name=".view.librarian.LibrarianHome"
+		<activity android:hardwareAccelerated="false"
+			android:name=".view.librarian.LibrarianHome"
 			android:exported="true"/>
-		<activity android:name=".view.admin.UpdateLibrarian"
+		<activity android:hardwareAccelerated="false"
+			android:name=".view.admin.UpdateLibrarian"
 			android:exported="true"/>
 
+
+
+		<meta-data
+			android:name="com.google.android.gms.ads.APPLICATION_ID"
+			android:value="ca-app-pub-3087766646825641~2191121247"/>
 	</application>
 
 </manifest>

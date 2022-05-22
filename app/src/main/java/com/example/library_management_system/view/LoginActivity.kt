@@ -11,19 +11,31 @@ import com.example.library_management_system.R
 import com.example.library_management_system.model.User
 import com.example.library_management_system.view.admin.AdminHome
 import com.example.library_management_system.view.librarian.LibrarianHome
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
 //	https://console.firebase.google.com/u/0/project/library-management-syste-842a9/database/library-management-syste-842a9-default-rtdb/data/~2F
 	private lateinit var mAuth: FirebaseAuth
 	override fun onCreate(savedInstanceState: Bundle?) {
+
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.login_activity)
+		MobileAds.initialize(this){
+
+		}
+
+		val mAdView = findViewById<AdView>(R.id.adView)
+		val adRequest = AdRequest.Builder().build()
+		mAdView.loadAd(adRequest)
 		mAuth = FirebaseAuth.getInstance()
 
 		var docRef = FirebaseFirestore.getInstance().collection("Users").document("Haroon1")
@@ -39,6 +51,8 @@ class LoginActivity : AppCompatActivity() {
 				else {
 					Log.d("Document: ", "No Data Exists")
 				}
+			} else {
+
 			}
 		}
 
@@ -49,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
 		}
 
 		findViewById<MaterialButton>(R.id.sign_in).setOnClickListener {
+			var intent = Intent(this, AdminHome::class.java)
 			var email = findViewById<TextInputEditText>(R.id.login_email).text.toString()
 			var password = findViewById<TextInputEditText>(R.id.login_password).text.toString()
 			if (TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
