@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:background="#2C2C2C"
+	tools:context=".view.user.BookDetails">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<!--Image view for displaying our book image-->
+			<ImageView
+				android:id="@+id/idIVbook"
+				android:layout_width="130dp"
+				android:layout_height="160dp"
+				android:layout_margin="18dp" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="20dp"
+				android:orientation="vertical">
+
+				<!--Text view for displaying book publisher-->
+				<TextView
+					android:id="@+id/idTVpublisher"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="4dp"
+					android:text="Publisher"
+					android:textColor="#FFFFFF"
+					android:textSize="15sp" />
+
+				<!--text view for displaying number of pages of book-->
+				<TextView
+					android:id="@+id/idTVNoOfPages"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="4dp"
+					android:padding="4dp"
+					android:text="Number of Pages"
+					android:textColor="#FFFFFF"
+					android:textSize="15sp" />
+
+				<!--text view for displaying book publish date-->
+				<TextView
+					android:id="@+id/idTVPublishDate"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="4dp"
+					android:padding="4dp"
+					android:text="Publish Date"
+					android:textColor="#FFFFFF"
+					android:textSize="15sp" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<!--text view for displaying book title-->
+		<TextView
+			android:id="@+id/idTVTitle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:padding="4dp"
+			android:text="Title"
+			android:textColor="#FFFFFF"
+			android:textSize="15sp" />
+
+		<!--text view for displaying book subtitle-->
+		<TextView
+			android:id="@+id/idTVSubTitle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:padding="4dp"
+			android:text="Subtitle"
+			android:textColor="#FFFFFF"
+			android:textSize="12sp" />
+
+		<!--text view for displaying book description-->
+		<TextView
+			android:id="@+id/idTVDescription"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:padding="4dp"
+			android:text="Description"
+			android:textColor="#FFFFFF"
+			android:textSize="12sp" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:orientation="horizontal"
+			android:weightSum="2">
+
+			<!--button for displaying book preview-->
+			<com.google.android.material.button.MaterialButton
+				android:id="@+id/idBtnPreview"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_margin="4dp"
+				android:layout_weight="1"
+				android:text="Preview"
+				android:backgroundTint="#2C2C2C"
+				android:textAllCaps="false"
+				app:strokeColor="#6C6E6C"
+				app:rippleColor="#494747"/>
+
+			<!--button for opening buying page of the book-->
+			<com.google.android.material.button.MaterialButton
+				android:id="@+id/idBtnBuy"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_margin="4dp"
+				android:layout_weight="1"
+				android:text="Buy"
+				android:textAllCaps="false"
+				android:backgroundTint="#4CAF50"/>
+
+		</LinearLayout>
+	</LinearLayout>
+
+</ScrollView>

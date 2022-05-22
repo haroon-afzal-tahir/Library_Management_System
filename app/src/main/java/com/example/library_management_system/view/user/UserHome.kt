@@ -1,24 +1,22 @@
-package com.example.library_management_system.view.librarian
+package com.example.library_management_system.view.user
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.library_management_system.FragmentLibrarianUserFragment
-import com.example.library_management_system.Librarian_Home_Fragment
-import com.example.library_management_system.R
+import com.example.library_management_system.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class LibrarianHome : AppCompatActivity() {
+class UserHome : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.librarian_home)
+		setContentView(R.layout.user_home)
 
-		replaceFragment(Librarian_Home_Fragment())
+		replaceFragment(FragmentUserHome())
 
-		findViewById<BottomNavigationView>(R.id.librarian_home_bottom_navigation_view).setOnItemSelectedListener { item ->
+		findViewById<BottomNavigationView>(R.id.bottomNavigationView).setOnItemSelectedListener { item ->
 			when(item.itemId) {
-				R.id.librarian_fragment_home -> replaceFragment(Librarian_Home_Fragment())
-				R.id.librarian_fragment_user -> replaceFragment(FragmentLibrarianUserFragment())
+				R.id.user_fragment_home -> replaceFragment(FragmentUserHome())
+				R.id.user_fragment_books -> replaceFragment(FragmentUserBook())
 				else -> return@setOnItemSelectedListener false
 			}
 		}

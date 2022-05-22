@@ -9,17 +9,22 @@
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/add_librarian.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/add_user.xml" value="0.2" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/admin_home.xml" value="0.1" />
+        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/book_details.xml" value="0.20854700854700856" />
+        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/book_view.xml" value="0.20854700854700856" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/bottom_navigation_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/confirmation_request.xml" value="0.1" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/crud_librarian.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/crud_user.xml" value="0.2" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/dashboard.xml" value="0.2" />
+        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_books.xml" value="0.2076923076923077" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_home.xml" value="0.176" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_librarian.xml" value="0.264" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_librarian_home.xml" value="0.20854700854700856" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_librarian_update.xml" value="0.20854700854700856" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_librarian_user.xml" value="0.1" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_user.xml" value="0.264" />
+        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_user_book.xml" value="0.20854700854700856" />
+        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_user_home.xml" value="0.20854700854700856" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/home_fragment.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/librarian_home.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/librarian_row.xml" value="0.4" />
@@ -27,24 +32,12 @@
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/manage_librarians.xml" value="0.253125" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/manage_users.xml" value="0.190625" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/signup_activity.xml" value="0.176" />
+        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/user_home.xml" value="0.20854700854700856" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/user_row.xml" value="0.264" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/menu/admin_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/menu/librarian_menu.xml" value="0.1574074074074074" />
-        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/login_activity.xml" value="0.2033514492753623" />
-        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/signup_activity.xml" value="0.11302083333333333" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.137" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/drawable/bg_white_rounded.xml" value="0.136" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/drawable/ic_places.xml" value="0.137" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/font/font_fam.xml" value="0.1" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/admin_activity.xml" value="0.136" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/dashboard.xml" value="0.21784420289855072" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_home.xml" value="0.2" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_librarian.xml" value="0.27447916666666666" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/fragment_user.xml" value="0.27447916666666666" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/login_activity.xml" value="0.264" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/signup_activity.xml" value="0.21784420289855072" />
-        <entry key="..\:/Users/Moin Sultan/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/user_home.xml" value="0.2" />
+        <entry key="..\:/Users/Haroon Tahir/AndroidStudioProjects/Library_Management_System/app/src/main/res/menu/user_menu.xml" value="0.2076923076923077" />
         <entry key="..\:/Users/noono/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/login_activity.xml" value="0.1933876811594203" />
         <entry key="..\:/Users/noono/AndroidStudioProjects/Library_Management_System/app/src/main/res/layout/signup_activity.xml" value="0.1933876811594203" />
       </map>

@@ -85,16 +85,6 @@
 
 		</com.google.android.material.textfield.TextInputLayout>
 
-		<Button
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Forgot Password?"
-			android:textSize="8dp"
-			android:backgroundTint="#2C2C2C"
-			android:layout_gravity="right"
-			android:layout_marginEnd="30dp"
-			style="?android:attr/borderlessButtonStyle"/>
-
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/sign_in"
 			style="@style/Widget.MaterialComponents.Button.OutlinedButton"

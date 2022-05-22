@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<uses-permission android:name="android.permission.INTERNET" />
-
 	<application
 		android:allowBackup="true"
 		android:icon="@mipmap/ic_launcher"
@@ -13,7 +12,7 @@
 		<activity android:hardwareAccelerated="true"
 			android:name=".view.LoginActivity"
 			android:exported="true">
-			<intent-filter >
+			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
@@ -36,8 +35,9 @@
 		<activity android:hardwareAccelerated="false"
 			android:name=".view.admin.UpdateLibrarian"
 			android:exported="true"/>
-
-
+		<activity android:hardwareAccelerated="false"
+			android:name=".view.user.UserHome"
+			android:exported="true"/>
 
 		<meta-data
 			android:name="com.google.android.gms.ads.APPLICATION_ID"

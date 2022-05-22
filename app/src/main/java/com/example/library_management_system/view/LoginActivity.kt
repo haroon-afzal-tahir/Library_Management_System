@@ -11,6 +11,7 @@ import com.example.library_management_system.R
 import com.example.library_management_system.model.User
 import com.example.library_management_system.view.admin.AdminHome
 import com.example.library_management_system.view.librarian.LibrarianHome
+import com.example.library_management_system.view.user.UserHome
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
@@ -102,8 +103,11 @@ class LoginActivity : AppCompatActivity() {
 											}
 											else {
 												// Launch Activity of User
-												val intent = Intent(this, AdminHome::class.java)
-												startActivity(intent)
+												val intent = Intent(this, UserHome::class.java)
+												db.collection("Users").whereEqualTo("Email", email).get().addOnSuccessListener { task3 ->
+													intent.putExtra("Name", task3.documents[0].get("Name").toString())
+													startActivity(intent)
+												}
 											}
 										}
 									}
