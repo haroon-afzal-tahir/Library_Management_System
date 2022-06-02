@@ -28,13 +28,21 @@ class AdminHomeUserViewAdapter(ct: Context?, user: ArrayList<User>) : RecyclerVi
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 		val inflater: LayoutInflater = LayoutInflater.from(context)
-		return MyViewHolder(inflater.inflate(R.layout.user_row, parent, false))
+		if (users[0].getType() == "User") {
+			return MyViewHolder(inflater.inflate(R.layout.user_row, parent, false))
+		} else {
+			return MyViewHolder(inflater.inflate(R.layout.librarian_row, parent, false))
+		}
 	}
 
 	override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-		holder.itemView.findViewById<TextView>(R.id.userName).text = users[position].getName()
-		holder.itemView.findViewById<TextView>(R.id.booksIssued).text = users[position].getAccount().getBorrowedBooks().toString()
-		holder.itemView.findViewById<TextView>(R.id.booksReturned).text = users[position].getAccount().getTotalBooksOrdered().toString()
+		if (users[position].getType() == "User") {
+			holder.itemView.findViewById<TextView>(R.id.userName).text = users[position].getName()
+			holder.itemView.findViewById<TextView>(R.id.booksIssued).text = users[position].getAccount().getBorrowedBooks().toString()
+			holder.itemView.findViewById<TextView>(R.id.booksReturned).text = users[position].getAccount().getTotalBooksOrdered().toString()
+		} else {
+			holder.itemView.findViewById<TextView>(R.id.librarianName).text = users[position].getName()
+		}
 	}
 
 	override fun getItemCount(): Int {

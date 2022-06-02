@@ -1,13 +1,12 @@
 package com.example.library_management_system
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +14,7 @@ import com.example.library_management_system.adapter.FragmentUserViewAdapter
 import com.example.library_management_system.model.User
 import com.example.library_management_system.view.admin.AddUser
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,7 +33,7 @@ class UserFragment : Fragment() {
 	private var param2: String? = null
 
 	private var recyclerView: RecyclerView? = null
-	private val usersList: ArrayList<User> = ArrayList()
+	private var originalUsersList: ArrayList<User> = ArrayList()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -56,13 +56,15 @@ class UserFragment : Fragment() {
 		val db = FirebaseFirestore.getInstance()
 		db.collection("Users").whereEqualTo("Type", "User").get().addOnCompleteListener { task ->
 			if (task.isSuccessful) {
+				val usersList = ArrayList<User>()
+
 				val doc = task.result
 				if (doc.documents.isNotEmpty()) {
 					for (document in doc.documents) {
 						usersList.add(User(document.get("Email").toString(), document.get("Name").toString(), document.get("Type").toString()))
 					}
 				}
-
+				originalUsersList = usersList
 				recyclerView = getView()?.findViewById(R.id.fragment_user_users_list)
 				recyclerView?.adapter = FragmentUserViewAdapter(getView()?.context, usersList)
 				recyclerView?.layoutManager = LinearLayoutManager(getView()?.context)
@@ -76,6 +78,25 @@ class UserFragment : Fragment() {
 			val intent = Intent(getView()?.context, AddUser::class.java)
 			intent.putExtra("Type", "Admin")
 			startActivity(intent)
+		}
+
+		getView()?.findViewById<ImageButton>(R.id.admin_user_search_btn)?.setOnClickListener {
+			val name = getView()?.findViewById<TextInputEditText>(R.id.admin_user_search)?.text.toString()
+			var usersList = ArrayList<User>()
+			if (originalUsersList.size != 0 && name.isNotEmpty()) {
+				for (user in originalUsersList) {
+					if (user.getName().contains(name, ignoreCase = true)) {
+						usersList.add(user)
+					}
+				}
+			}
+			else {
+				usersList = originalUsersList
+			}
+
+			recyclerView = getView()?.findViewById(R.id.fragment_user_users_list)
+			recyclerView?.adapter = FragmentUserViewAdapter(getView()?.context, usersList)
+			recyclerView?.layoutManager = LinearLayoutManager(getView()?.context)
 		}
 	}
 

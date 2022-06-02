@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.library_management_system.adapter.AdminHomeUserViewAdapter
 import com.example.library_management_system.model.User
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
@@ -30,6 +32,9 @@ class HomeFragment : Fragment() {
 	private var userView: RecyclerView? = null
 	private var librarianView: RecyclerView? = null
 
+	private lateinit var originalUsersList: ArrayList<User>
+	private lateinit var originalLibrariansList: ArrayList<User>
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		arguments?.let {
@@ -49,9 +54,8 @@ class HomeFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-
-		val usersList: ArrayList<User> = ArrayList()
-		val librariansList: ArrayList<User> = ArrayList()
+		var usersList: ArrayList<User> = ArrayList()
+		var librariansList: ArrayList<User> = ArrayList()
 
 		FirebaseFirestore.getInstance().collection("Users").whereEqualTo("Type", "User").get().addOnCompleteListener { task ->
 			if (task.isSuccessful) {
@@ -61,6 +65,7 @@ class HomeFragment : Fragment() {
 						usersList.add(User(document.get("Email").toString(), document.get("Name").toString(), document.get("Type").toString()))
 					}
 				}
+				originalUsersList = usersList
 				userView = getView()?.findViewById(R.id.userView)
 				userView?.adapter = AdminHomeUserViewAdapter(getView()?.context, usersList)
 				userView?.layoutManager = LinearLayoutManager(getView()?.context)
@@ -78,10 +83,43 @@ class HomeFragment : Fragment() {
 						librariansList.add(User(document.get("Email").toString(), document.get("Name").toString(), "Librarian"))
 					}
 				}
+				originalLibrariansList = librariansList
 				librarianView = getView()?.findViewById(R.id.librariansView)
 				librarianView?.adapter = AdminHomeUserViewAdapter(getView()?.context, librariansList)
 				librarianView?.layoutManager = LinearLayoutManager(getView()?.context)
 			}
+		}
+
+		getView()?.findViewById<ImageButton>(R.id.admin_home_search_btn)?.setOnClickListener {
+			val name = getView()?.findViewById<TextInputEditText>(R.id.admin_home_search)?.text.toString()
+
+			if (originalUsersList.size != 0 && name.isNotEmpty()) {
+				usersList = ArrayList()
+				for (user in originalUsersList) {
+					if (user.getName().contains(name, ignoreCase = true)) {
+						usersList.add(user)
+					}
+				}
+			}
+			else {
+				usersList = originalUsersList
+			}
+			userView?.adapter = AdminHomeUserViewAdapter(getView()?.context, usersList)
+			userView?.layoutManager = LinearLayoutManager(getView()?.context)
+
+			if (originalLibrariansList.size != 0 && name.isNotEmpty()) {
+				librariansList = ArrayList()
+				for (librarian in originalLibrariansList) {
+					if (librarian.getName().contains(name, ignoreCase = true)) {
+						librariansList.add(librarian)
+					}
+				}
+			}
+			else {
+				librariansList = originalLibrariansList
+			}
+			librarianView?.adapter = AdminHomeUserViewAdapter(getView()?.context, librariansList)
+			librarianView?.layoutManager = LinearLayoutManager(getView()?.context)
 		}
 	}
 

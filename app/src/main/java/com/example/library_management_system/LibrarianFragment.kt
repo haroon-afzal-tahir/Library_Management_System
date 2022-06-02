@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.library_management_system.adapter.LibrarianViewAdapter
@@ -13,6 +14,7 @@ import com.example.library_management_system.model.User
 import com.example.library_management_system.view.admin.AddLibrarian
 import com.example.library_management_system.view.admin.UpdateLibrarian
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,7 +34,7 @@ class LibrarianFragment : Fragment() {
 
 	private var recyclerView: RecyclerView? = null
 	private lateinit var librarianViewClickListener: LibrarianViewAdapter.LibrarianViewClickListener
-	private val librariansList: ArrayList<User> = ArrayList()
+	private var originalLibrariansList: ArrayList<User> = ArrayList()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -52,14 +54,20 @@ class LibrarianFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-
+		var librarianList = ArrayList<User>()
 		FirebaseFirestore.getInstance().collection("Users").whereEqualTo("Type", "Librarian").get().addOnSuccessListener { documents ->
 			for (document in documents) {
-				librariansList.add(User(document.get("Email").toString(), document.get("Name").toString(), document.get("Type").toString()))
+				librarianList.add(User(document.get("Email").toString(), document.get("Name").toString(), document.get("Type").toString()))
 			}
-			setOnClickListener()
+			originalLibrariansList = librarianList
 			recyclerView = getView()?.findViewById(R.id.fragment_librarian_librarians_list)
-			recyclerView?.adapter = LibrarianViewAdapter(getView()?.context, librarianViewClickListener, librariansList)
+			recyclerView?.adapter = LibrarianViewAdapter(getView()?.context, object : LibrarianViewAdapter.LibrarianViewClickListener {
+				override fun onClick(view: View?, position: Int) {
+					val intent = Intent(getView()?.context, UpdateLibrarian::class.java)
+					intent.putExtra("Name", originalLibrariansList[position].getName())
+					startActivity(intent)
+				}
+			}, librarianList)
 			recyclerView?.layoutManager = LinearLayoutManager(getView()?.context)
 		}
 
@@ -69,16 +77,32 @@ class LibrarianFragment : Fragment() {
 			startActivity(intent)
 		}
 
-	}
+		getView()?.findViewById<ImageButton>(R.id.admin_librarian_search_btn)?.setOnClickListener {
+			val name = getView()?.findViewById<TextInputEditText>(R.id.admin_librarian_search)?.text.toString()
 
-	fun setOnClickListener() {
-		librarianViewClickListener = object : LibrarianViewAdapter.LibrarianViewClickListener {
-			override fun onClick(view: View?, position: Int) {
-				val intent = Intent(getView()?.context, UpdateLibrarian::class.java)
-				intent.putExtra("Name", librariansList[position].getName())
-				startActivity(intent)
+			if (originalLibrariansList.size != 0 && name.isNotEmpty()) {
+				librarianList = ArrayList()
+
+				for (librarian in originalLibrariansList) {
+					if (librarian.getName().contains(name, ignoreCase = true)) {
+						librarianList.add(librarian)
+					}
+				}
 			}
+			else {
+				librarianList = originalLibrariansList
+			}
+			recyclerView = getView()?.findViewById(R.id.fragment_librarian_librarians_list)
+			recyclerView?.adapter = LibrarianViewAdapter(getView()?.context, object : LibrarianViewAdapter.LibrarianViewClickListener {
+				override fun onClick(view: View?, position: Int) {
+					val intent = Intent(getView()?.context, UpdateLibrarian::class.java)
+					intent.putExtra("Name", originalLibrariansList[position].getName())
+					startActivity(intent)
+				}
+			}, librarianList)
+			recyclerView?.layoutManager = LinearLayoutManager(getView()?.context)
 		}
+
 	}
 
 	companion object {

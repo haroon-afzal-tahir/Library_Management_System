@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.library_management_system.adapter.AdminHomeUserViewAdapter
 import com.example.library_management_system.model.User
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,6 +29,7 @@ class Librarian_Home_Fragment : Fragment() {
 	private var param2: String? = null
 
 	private var userView: RecyclerView? = null
+	private lateinit var originalUsersList: ArrayList<User>
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -47,17 +50,38 @@ class Librarian_Home_Fragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		val usersList = ArrayList<User>()
+		var usersList = ArrayList<User>()
 		FirebaseFirestore.getInstance().collection("Users").whereEqualTo("Type", "User").get().addOnCompleteListener { task ->
 			if (task.isSuccessful) {
 				val doc = task.result.documents
 				for (document in doc) {
 					usersList.add(User(document.get("Email").toString(), document.get("Name").toString(), document.get("Type").toString()))
 				}
+				originalUsersList = usersList
 				userView = getView()?.findViewById(R.id.userView)
 				userView?.adapter = AdminHomeUserViewAdapter(getView()?.context, usersList)
 				userView?.layoutManager = LinearLayoutManager(getView()?.context)
 			}
+		}
+
+		getView()?.findViewById<ImageButton>(R.id.librarian_home_search_btn)?.setOnClickListener {
+			val name = getView()?.findViewById<TextInputEditText>(R.id.librarian_home_search)?.text.toString()
+
+			if (originalUsersList.size != 0 && name.isNotEmpty()) {
+				usersList = ArrayList()
+				for (user in originalUsersList) {
+					if (user.getName().contains(name, ignoreCase = true)) {
+						usersList.add(user)
+					}
+				}
+			}
+			else {
+				usersList = originalUsersList
+			}
+
+			userView = getView()?.findViewById(R.id.userView)
+			userView?.adapter = AdminHomeUserViewAdapter(getView()?.context, usersList)
+			userView?.layoutManager = LinearLayoutManager(getView()?.context)
 		}
 	}
 

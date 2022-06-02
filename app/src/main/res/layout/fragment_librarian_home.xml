@@ -33,11 +33,7 @@
 					android:rowCount="1"
 					android:layout_margin="10dp"
 					android:columnCount="2">
-					<Button
-						android:drawableLeft="@drawable/ic_menu"
-						android:layout_height="wrap_content"
-						android:layout_width="58dp"
-						style="@style/Widget.AppCompat.Button.Borderless"/>
+
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
@@ -49,13 +45,34 @@
 
 				</GridLayout>
 
-				<SearchView
-					android:id="@+id/fragment_librarian_home_search_view"
-					android:layout_width="match_parent"
+				<LinearLayout
 					android:layout_height="wrap_content"
-					android:background="@drawable/bg_white_rounded"
-					android:iconifiedByDefault="false"
-					android:queryHint="Search here" />
+					android:layout_width="match_parent"
+					android:columnCount="2"
+					android:orientation="horizontal"
+					android:weightSum="5">
+
+					<com.google.android.material.textfield.TextInputLayout
+						android:layout_height="wrap_content"
+						android:layout_weight="4"
+						android:layout_width="match_parent"
+						android:hint="Search Here">
+						<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/librarian_home_search"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:background="@drawable/bg_white_rounded"
+							android:iconifiedByDefault="false" />
+					</com.google.android.material.textfield.TextInputLayout>
+					<ImageButton
+						android:id="@+id/librarian_home_search_btn"
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:backgroundTint="#4CAF50"
+						android:src="@drawable/ic_search"
+						android:layout_gravity="center"
+						android:layout_weight="1"/>
+				</LinearLayout>
 
 			</GridLayout>
 		</com.google.android.material.card.MaterialCardView>

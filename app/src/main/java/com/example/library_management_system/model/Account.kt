@@ -12,20 +12,6 @@ class Account {
 	fun setTotalBooksOrdered(totalBooksOrdered: Int) { this.totalBooksOrdered = totalBooksOrdered }
 	fun getBorrowedBooks() : Int { return borrowedBooks }
 	fun getTotalBooksOrdered() : Int { return totalBooksOrdered }
-	fun calculateFine(name: String, bookName: String) : Int {
-		val firebaseFirestore = FirebaseFirestore.getInstance()
-		val info = firebaseFirestore.collection("Account").document(name)
-		var days: Long = 0
-		info.get().addOnSuccessListener { task ->
 
-			val arrays: Map<String, Timestamp> = task.get("Borrowed Books") as Map<String, Timestamp>
-			val submissionDate = (arrays[bookName] as Timestamp).toDate()
-			val todayDate = Timestamp.now().toDate()
 
-			if (todayDate > submissionDate) {
-				days = TimeUnit.MILLISECONDS.toDays(todayDate.time - submissionDate.time)
-			}
-		}
-		return days.toInt()
-	}
 }

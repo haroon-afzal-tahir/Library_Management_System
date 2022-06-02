@@ -1,11 +1,14 @@
 package com.example.library_management_system
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import com.example.library_management_system.view.user.PayActivity
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import org.w3c.dom.Text
@@ -46,10 +49,16 @@ class FragmentUserHome : Fragment() {
 
 		val db = FirebaseFirestore.getInstance()
 		db.collection("Account").document(activity?.intent?.getStringExtra("Name").toString()).get().addOnSuccessListener { task ->
-			val map = task.get("Borrowed Books") as Map<String, Timestamp>
+			val map = task.get("Borrowed Books") as Map<*, *>
 			val returnBooks =  task.get("Total Books Ordered").toString().toInt()
 			getView()?.findViewById<TextView>(R.id.returnedBooks)?.text = (returnBooks - map.size).toString()
 			getView()?.findViewById<TextView>(R.id.issuedBooks)?.text = map.size.toString()
+		}
+
+		getView()?.findViewById<CardView>(R.id.info_user)?.setOnClickListener {
+			val intent = Intent(getView()?.context, PayActivity::class.java)
+			intent.putExtra("Name", activity?.intent?.getStringExtra("Name").toString())
+			startActivity(intent)
 		}
 	}
 

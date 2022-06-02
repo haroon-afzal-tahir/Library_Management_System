@@ -38,6 +38,9 @@
 		<activity android:hardwareAccelerated="false"
 			android:name=".view.user.UserHome"
 			android:exported="true"/>
+		<activity android:hardwareAccelerated="false"
+			android:name=".view.user.PayActivity"
+			android:exported="true" />
 
 		<meta-data
 			android:name="com.google.android.gms.ads.APPLICATION_ID"

@@ -73,11 +73,11 @@ class FragmentUserBook : Fragment() {
 				return@setOnClickListener;
 			}
 
-			getBooksInfo(searchEdt?.text.toString())
+			getBooksInfo(searchEdt?.text.toString(), getView())
 		}
 	}
 
-	fun getBooksInfo(query: String) {
+	fun getBooksInfo(query: String, view: View?) {
 		bookInfoArrayList = ArrayList()
 
 		requestQueue = Volley.newRequestQueue(activity)

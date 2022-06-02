@@ -6,7 +6,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_margin="10dp"
-	app:cardElevation="8dp">
+	app:cardElevation="8dp"
+	app:cardBackgroundColor="#2C2C2C">
 
 	<RelativeLayout
 		android:layout_width="match_parent"
@@ -26,7 +27,7 @@
 			android:layout_toEndOf="@id/idIVbook"
 			android:padding="3dp"
 			android:text="Book Title"
-			android:textColor="@color/black"
+			android:textColor="#FFFFFF"
 			android:textSize="11sp" />
 
 		<TextView
@@ -38,7 +39,7 @@
 			android:layout_toEndOf="@id/idIVbook"
 			android:padding="3dp"
 			android:text="Publisher"
-			android:textColor="@color/black"
+			android:textColor="#FFFFFF"
 			android:textSize="11sp" />
 
 		<TextView
@@ -49,8 +50,8 @@
 			android:layout_marginTop="3dp"
 			android:layout_toEndOf="@id/idIVbook"
 			android:padding="3dp"
-			android:text="Page count"
-			android:textColor="@color/black"
+			android:text="Page Count"
+			android:textColor="#FFFFFF"
 			android:textSize="11sp" />
 
 		<TextView
@@ -61,8 +62,8 @@
 			android:layout_alignParentEnd="true"
 			android:layout_marginEnd="5dp"
 			android:padding="3dp"
-			android:text="date"
-			android:textColor="@color/black"
+			android:text="Date"
+			android:textColor="#FFFFFF"
 			android:textSize="11sp" />
 
 	</RelativeLayout>

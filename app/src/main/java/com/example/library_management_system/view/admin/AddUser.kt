@@ -37,17 +37,18 @@ class AddUser : AppCompatActivity() {
 							if (task2.isSuccessful) {
 								Toast.makeText(this, "Librarian Successfully Added", Toast.LENGTH_SHORT).show()
 
-								var intent: Intent = Intent(this, AdminHome::class.java)
-								intent = if (getIntent().getStringExtra("Type").toString() == "Admin") {
-									Intent(this, AdminHome::class.java)
-								} else {
-									Intent(this, LibrarianHome::class.java)
-								}
-								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//								var intent: Intent = Intent(this, AdminHome::class.java)
+//								intent = if (getIntent().getStringExtra("Type").toString() == "Admin") {
+//									Intent(this, AdminHome::class.java)
+//								} else {
+//									Intent(this, LibrarianHome::class.java)
+//								}
+//								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
 								InsertDataIntoFirestore().insertUser(email, name, password, "User")
 
-								startActivity(intent)
+//								startActivity(intent)
+								super.onBackPressed()
 							} else {
 								Toast.makeText(this, "Librarian Couldn't Be Added Due To Some Issue", Toast.LENGTH_SHORT).show()
 							}
