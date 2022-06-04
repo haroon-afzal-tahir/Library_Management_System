@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.library_management_system.R
+import com.example.library_management_system.helper.InsertDataIntoFirestore
 import com.squareup.picasso.Picasso
 
 
@@ -82,14 +83,15 @@ class BookDetails : AppCompatActivity() {
 		}
 
 		buyBtn.setOnClickListener {
-			if (buyLink.isEmpty()) {
-				Toast.makeText(this, "No buy page present for this book", Toast.LENGTH_SHORT).show()
-				return@setOnClickListener
-			}
-
-			val uri = Uri.parse(buyLink)
-			val i = Intent(Intent.ACTION_VIEW, uri)
-			startActivity(i)
+//			if (buyLink.isEmpty()) {
+//				Toast.makeText(this, "No buy page present for this book", Toast.LENGTH_SHORT).show()
+//				return@setOnClickListener
+//			}
+			InsertDataIntoFirestore.insertUserWithBookIssue(title)
+			val intent = Intent(this, UserHome::class.java)
+			intent.putExtra("Name", InsertDataIntoFirestore.getUser())
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+			startActivity(intent)
 		}
 	}
 }

@@ -87,8 +87,7 @@ class FragmentUserBook : Fragment() {
 
 		val queue = Volley.newRequestQueue(activity)
 		val booksObjRequest = JsonObjectRequest(
-			Request.Method.GET, url, null,
-			{ response ->
+			Request.Method.GET, url, null, { response ->
 				progressBar!!.visibility = View.GONE
 				// inside on response method we are extracting all our json data.
 				try {
@@ -104,11 +103,11 @@ class FragmentUserBook : Fragment() {
 						val description = volumeObj.optString("description")
 						val pageCount = volumeObj.optInt("pageCount")
 						val imageLinks = volumeObj.optJSONObject("imageLinks")
-						val thumbnail = imageLinks.optString("thumbnail")
+						val thumbnail = imageLinks?.optString("thumbnail")
 						val previewLink = volumeObj.optString("previewLink")
 						val infoLink = volumeObj.optString("infoLink")
 						val saleInfoObj = itemsObj.optJSONObject("saleInfo")
-						val buyLink = saleInfoObj.optString("buyLink")
+						val buyLink = saleInfoObj?.optString("buyLink")
 						val authorsArrayList: ArrayList<String> = ArrayList()
 						if (authorsArray.length() != 0) {
 							for (j in 0 until authorsArray.length()) {

@@ -12,17 +12,16 @@
 		android:name="androidx.navigation.fragment.NavHostFragment"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_above="@+id/bottomNavigationView"
 		app:defaultNavHost="false" />
 
-	<com.google.android.material.bottomnavigation.BottomNavigationView
-		android:id="@+id/bottomNavigationView"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="#494848"
-		app:itemIconTint="@color/bottom_nav_color"
-		app:itemTextColor="@color/bottom_nav_color"
-		android:layout_alignParentBottom="true"
-		app:menu="@menu/user_menu" />
+<!--	<com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--		android:id="@+id/bottomNavigationView"-->
+<!--		android:layout_width="match_parent"-->
+<!--		android:layout_height="wrap_content"-->
+<!--		android:background="#494848"-->
+<!--		app:itemIconTint="@color/bottom_nav_color"-->
+<!--		app:itemTextColor="@color/bottom_nav_color"-->
+<!--		android:layout_alignParentBottom="true"-->
+<!--		app:menu="@menu/user_menu" />-->
 
 </RelativeLayout>

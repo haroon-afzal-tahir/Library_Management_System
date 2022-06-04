@@ -45,7 +45,7 @@ class AddUser : AppCompatActivity() {
 //								}
 //								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
-								InsertDataIntoFirestore().insertUser(email, name, password, "User")
+								InsertDataIntoFirestore.insertUser(email, name, password, "User")
 
 //								startActivity(intent)
 								super.onBackPressed()

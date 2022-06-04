@@ -43,7 +43,7 @@ class AddLibrarian : AppCompatActivity() {
 //									intent = Intent(this, LibrarianHome::class.java)
 								}
 								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-								InsertDataIntoFirestore().insertUser(email, name, password, "Librarian")
+								InsertDataIntoFirestore.insertUser(email, name, password, "Librarian")
 								startActivity(intent)
 							} else {
 								Toast.makeText(this, "Librarian Couldn't Be Added Due To Some Issue", Toast.LENGTH_SHORT).show()

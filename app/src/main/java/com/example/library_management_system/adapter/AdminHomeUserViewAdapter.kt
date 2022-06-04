@@ -38,8 +38,8 @@ class AdminHomeUserViewAdapter(ct: Context?, user: ArrayList<User>) : RecyclerVi
 	override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 		if (users[position].getType() == "User") {
 			holder.itemView.findViewById<TextView>(R.id.userName).text = users[position].getName()
-			holder.itemView.findViewById<TextView>(R.id.booksIssued).text = users[position].getAccount().getBorrowedBooks().toString()
-			holder.itemView.findViewById<TextView>(R.id.booksReturned).text = users[position].getAccount().getTotalBooksOrdered().toString()
+			holder.itemView.findViewById<TextView>(R.id.booksIssued).text = users[position].getBorrowedBooks().toString()
+			holder.itemView.findViewById<TextView>(R.id.booksReturned).text = users[position].getBooksReturned().toString()
 		} else {
 			holder.itemView.findViewById<TextView>(R.id.librarianName).text = users[position].getName()
 		}

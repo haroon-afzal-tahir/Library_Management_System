@@ -70,9 +70,6 @@ class HomeFragment : Fragment() {
 				userView?.adapter = AdminHomeUserViewAdapter(getView()?.context, usersList)
 				userView?.layoutManager = LinearLayoutManager(getView()?.context)
 			}
-			else {
-
-			}
 		}
 
 		FirebaseFirestore.getInstance().collection("Users").whereEqualTo("Type", "Librarian").get().addOnCompleteListener { task ->

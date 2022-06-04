@@ -1,17 +1,22 @@
 package com.example.library_management_system
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.library_management_system.adapter.AdminHomeUserViewAdapter
 import com.example.library_management_system.model.User
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.concurrent.Executor;
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,16 +56,30 @@ class Librarian_Home_Fragment : Fragment() {
 		super.onViewCreated(view, savedInstanceState)
 
 		var usersList = ArrayList<User>()
+
+		val db = FirebaseFirestore.getInstance()
+
+		db.collection("Users").whereEqualTo("Type", "User").get().addOnSuccessListener(ExecuteOnCaller(), OnSuccessListener { task ->
+			val doc = task.documents
+			for (document in doc) {
+				usersList.add(User(document.get("Email").toString(), document.get("Name").toString(), document.get("Type").toString()))
+			}
+			originalUsersList = usersList
+			userView = getView()?.findViewById(R.id.userView)
+			userView?.adapter = AdminHomeUserViewAdapter(getView()?.context, usersList)
+			userView?.layoutManager = LinearLayoutManager(getView()?.context)
+		})
+
 		FirebaseFirestore.getInstance().collection("Users").whereEqualTo("Type", "User").get().addOnCompleteListener { task ->
 			if (task.isSuccessful) {
-				val doc = task.result.documents
-				for (document in doc) {
-					usersList.add(User(document.get("Email").toString(), document.get("Name").toString(), document.get("Type").toString()))
-				}
-				originalUsersList = usersList
-				userView = getView()?.findViewById(R.id.userView)
-				userView?.adapter = AdminHomeUserViewAdapter(getView()?.context, usersList)
-				userView?.layoutManager = LinearLayoutManager(getView()?.context)
+//				val doc = task.result.documents
+//				for (document in doc) {
+//					usersList.add(User(document.get("Email").toString(), document.get("Name").toString(), document.get("Type").toString()))
+//				}
+//				originalUsersList = usersList
+//				userView = getView()?.findViewById(R.id.userView)
+//				userView?.adapter = AdminHomeUserViewAdapter(getView()?.context, usersList)
+//				userView?.layoutManager = LinearLayoutManager(getView()?.context)
 			}
 		}
 
@@ -103,5 +122,24 @@ class Librarian_Home_Fragment : Fragment() {
 					putString(ARG_PARAM2, param2)
 				}
 			}
+	}
+}
+
+class ExecuteOnCaller : Executor {
+	private val handler: Handler = threadLocalHandler.get() as Handler
+	override fun execute(command: Runnable) {
+		handler.post(command)
+	}
+
+	companion object {
+		private val threadLocalHandler: ThreadLocal<Handler> = object : ThreadLocal<Handler>() {
+			override fun initialValue(): Handler {
+				var looper = Looper.myLooper()
+				if (looper == null) {
+					looper = Looper.getMainLooper()
+				}
+				return Handler(looper!!)
+			}
+		}
 	}
 }

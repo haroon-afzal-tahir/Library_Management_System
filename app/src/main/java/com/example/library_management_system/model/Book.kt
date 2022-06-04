@@ -1,6 +1,6 @@
 package com.example.library_management_system.model
 
-class Book(title: String, subtitle: String, authors: ArrayList<String>, publisher: String, publishedDate: String, description: String, pageCount: Int, thumbnail: String, previewLink: String, infoLink : String, buyLink: String) {
+class Book(title: String, subtitle: String, authors: ArrayList<String>, publisher: String, publishedDate: String, description: String, pageCount: Int, thumbnail: String?, previewLink: String, infoLink : String?, buyLink: String?) {
 	private var title: String
 	private var subtitle: String
 	private var authors: ArrayList<String>
@@ -8,10 +8,10 @@ class Book(title: String, subtitle: String, authors: ArrayList<String>, publishe
 	private var publishedDate: String
 	private var description: String
 	private var pageCount: Int = 0
-	private var thumbnail: String
+	private var thumbnail: String?
 	private var previewLink: String
-	private var infoLink: String
-	private var buyLink: String
+	private var infoLink: String?
+	private var buyLink: String?
 
 	fun getTitle() : String { return title }
 	fun getSubtitle() : String { return subtitle }
@@ -20,10 +20,10 @@ class Book(title: String, subtitle: String, authors: ArrayList<String>, publishe
 	fun getPublishedDate() : String { return publishedDate }
 	fun getDescription() : String { return description }
 	fun getPageCount() : Int { return pageCount }
-	fun getThumbnail() : String { return thumbnail }
+	fun getThumbnail() : String? { return thumbnail }
 	fun getPreviewLink() : String { return previewLink }
-	fun getInfoLink() : String { return infoLink }
-	fun getBuyLink() : String { return buyLink }
+	fun getInfoLink() : String? { return infoLink }
+	fun getBuyLink() : String? { return buyLink }
 
 	fun setTitle(title : String) { this.title = title }
 	fun setSubtitles(subtitle : String) { this.subtitle = subtitle }

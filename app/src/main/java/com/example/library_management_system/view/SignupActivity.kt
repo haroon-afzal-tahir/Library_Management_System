@@ -3,17 +3,14 @@ package com.example.library_management_system.view
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.library_management_system.R
 import com.example.library_management_system.helper.InsertDataIntoFirestore
-import com.example.library_management_system.view.admin.AdminHome
+import com.example.library_management_system.view.user.UserHome
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 
 class SignupActivity : AppCompatActivity() {
 
@@ -52,10 +49,10 @@ class SignupActivity : AppCompatActivity() {
 							mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener	 { task1 ->
 								if (task1.isSuccessful) {
 									Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_LONG).show()
-									val intent = Intent(this, AdminHome::class.java)
+									val intent = Intent(this, UserHome::class.java)
 									intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
-									InsertDataIntoFirestore().insertUser(email, name, password, "User")
+									InsertDataIntoFirestore.insertUser(email, name, password, "User")
 
 									startActivity(intent)
 								} else {

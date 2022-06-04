@@ -7,34 +7,35 @@ class User(email: String, name: String, type: String) {
 	private var email: String
 	private var name: String
 	private var type: String
-	private var fine: Int = 0
+	private var borrowedBooks: Int = 0
+	private var totalBooksOrdered: Int = 0
+	private var returnedBooks: Int = 0
 
-	private var account: Account
 
 	fun getEmail() : String { return email }
 	fun getName() : String { return name }
 	fun getType() : String { return type }
-	fun getAccount() : Account { return account }
 
-	fun setEmail(email: String) { this.email = email }
-	fun setName(name: String) { this.name = name }
-	fun setType(type: String) { this.type = type }
+	fun getBorrowedBooks() : Int { return borrowedBooks }
+	fun getTotalBooksOrdered() : Int { return totalBooksOrdered }
+	fun getBooksReturned() : Int { return returnedBooks }
 
 	init {
 		this.email = email
 		this.name = name
 		this.type = type
 
-		account = Account()
-
 		val db = (FirebaseFirestore.getInstance()).collection("Account").document(name)
 
 		db.get().addOnSuccessListener { task ->
-			account.setBorrowedBooks((task.get("Borrowed Books") as Map<*, *>).size)
-			account.setTotalBooksOrdered(task.get("Total Books Ordered").toString().toInt())
+			borrowedBooks = (task.get("Borrowed Books") as Map<*, *>).size
+			totalBooksOrdered = task.get("Total Books Ordered").toString().toInt()
+			returnedBooks = task.get("Total Books Returned").toString().toInt()
 
-			Log.d("Borrowed Books", account.getBorrowedBooks().toString())
-			Log.d("Total Books", account.getTotalBooksOrdered().toString())
+			Log.d("Borrowed Books", borrowedBooks.toString())
+			Log.d("Total Books", totalBooksOrdered.toString())
+			Log.d("Returned Books", returnedBooks.toString())
+			return@addOnSuccessListener
 		}
 	}
 }

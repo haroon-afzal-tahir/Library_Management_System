@@ -15,55 +15,80 @@ import com.squareup.picasso.Picasso
 
 
 class BookAdapter(context: Context, bookInfo: ArrayList<Book>) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
-	class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-		var nameTV: TextView? = null
-		var publisherTV:TextView? = null
-		var pageCountTV:TextView? = null
-		var dateTV:TextView? = null
-		var bookIV: ImageView? = null
+	// creating variables for arraylist and context.
+	private var bookInfoArrayList: ArrayList<Book>
+	private var mContext: Context
 
-		init {
-			nameTV = itemView.findViewById(R.id.idTVBookTitle)
-			publisherTV = itemView.findViewById<TextView>(R.id.idTVpublisher)
-			pageCountTV = itemView.findViewById<TextView>(R.id.idTVPageCount)
-			dateTV = itemView.findViewById<TextView>(R.id.idTVDate)
-			bookIV = itemView.findViewById(R.id.idIVbook)
-		}
+	// creating constructor for array list and context.
+	init {
+		this.bookInfoArrayList = bookInfo
+		this.mContext = context
 	}
 
-	private var context = context
-	private var bookInfo = bookInfo
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
-		return BookViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.book_view, parent, false))
+		// inflating our layout for item of recycler view item.
+		val view: View =
+			LayoutInflater.from(parent.context).inflate(R.layout.book_view, parent, false)
+		return BookViewHolder(view)
 	}
 
 	override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-		val book = bookInfo[position]
-		holder.nameTV?.text = book.getTitle()
-		holder.publisherTV?.text = book.getPublisher()
-		holder.pageCountTV?.text = "No of Pages : ${book.getPageCount()}"
-		holder.dateTV?.text = book.getPublishedDate()
-		Picasso.get().load(book.getThumbnail()).into(holder.bookIV)
 
-		holder.itemView.setOnClickListener {
-			val intent = Intent(context, BookDetails::class.java)
-			intent.putExtra("Title", book.getTitle())
-			intent.putExtra("Subtitle", book.getSubtitle())
-			intent.putExtra("Authors", book.getAuthors())
-			intent.putExtra("Publisher", book.getPublisher())
-			intent.putExtra("Description", book.getDescription())
-			intent.putExtra("PageCount", book.getPageCount())
-			intent.putExtra("Thumbnail", book.getThumbnail())
-			intent.putExtra("PreviewLink", book.getPreviewLink())
-			intent.putExtra("InfoLink", book.getInfoLink())
-			intent.putExtra("BuyLink", book.getBuyLink())
+		// inside on bind view holder method we are
+		// setting ou data to each UI component.
+		val bookInfo: Book = bookInfoArrayList[position]
+		holder.nameTV.text = bookInfo.getTitle()
+		holder.publisherTV.text = bookInfo.getPublisher()
+		holder.pageCountTV.text = "No of Pages : " + bookInfo.getPageCount()
+		holder.dateTV.text = bookInfo.getPublishedDate()
 
-			context.startActivity(intent)
+		// below line is use to set image from URL in our image view.
+		Picasso.get().load(bookInfo.getThumbnail()).into(holder.bookIV)
+
+		// below line is use to add on click listener for our item of recycler view.
+		holder.itemView.setOnClickListener { // inside on click listener method we are calling a new activity
+			// and passing all the data of that item in next intent.
+			val i = Intent(mContext, BookDetails::class.java)
+			i.putExtra("Title", bookInfo.getTitle())
+			i.putExtra("Subtitle", bookInfo.getSubtitle())
+			i.putExtra("Authors", bookInfo.getAuthors())
+			i.putExtra("Publisher", bookInfo.getPublisher())
+			i.putExtra("PublishedDate", bookInfo.getPublishedDate())
+			i.putExtra("Description", bookInfo.getDescription())
+			i.putExtra("PageCount", bookInfo.getPageCount())
+			i.putExtra("Thumbnail", bookInfo.getThumbnail())
+			i.putExtra("PreviewLink", bookInfo.getPreviewLink())
+			i.putExtra("InfoLink", bookInfo.getInfoLink())
+			i.putExtra("BuyLink", bookInfo.getBuyLink())
+
+			// after passing that data we are
+			// starting our new  intent.
+			mContext.startActivity(i)
 		}
 	}
 
 	override fun getItemCount(): Int {
-		return bookInfo.size
+		// inside get item count method we
+		// are returning the size of our array list.
+		return bookInfoArrayList.size
+	}
+
+	class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+		// below line is use to initialize
+		// our text view and image views.
+		var nameTV: TextView
+		var publisherTV: TextView
+		var pageCountTV: TextView
+		var dateTV: TextView
+		var bookIV: ImageView
+
+		init {
+			nameTV = itemView.findViewById(R.id.idTVBookTitle)
+			publisherTV = itemView.findViewById(R.id.idTVpublisher)
+			pageCountTV = itemView.findViewById(R.id.idTVPageCount)
+			dateTV = itemView.findViewById(R.id.idTVDate)
+			bookIV = itemView.findViewById(R.id.idIVbook)
+		}
 	}
 
 }

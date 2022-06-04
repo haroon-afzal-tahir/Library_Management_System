@@ -127,7 +127,7 @@
 				android:layout_height="wrap_content"
 				android:layout_margin="4dp"
 				android:layout_weight="1"
-				android:text="Buy"
+				android:text="Issue"
 				android:textAllCaps="false"
 				android:backgroundTint="#4CAF50"/>
 

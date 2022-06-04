@@ -34,7 +34,8 @@ class UpdateLibrarian : AppCompatActivity() {
 								"Password" to newPassword,
 								"Type" to "Librarian"
 							)
-							document.reference.update(user as Map<String, Any>)
+							document.reference.delete()
+							document.reference.set(user)
 						}
 					}
 					onBackPressed()

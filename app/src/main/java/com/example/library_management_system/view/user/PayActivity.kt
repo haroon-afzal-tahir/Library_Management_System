@@ -1,6 +1,7 @@
 package com.example.library_management_system.view.user
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import androidx.appcompat.app.AppCompatActivity
 import com.example.library_management_system.R
 import com.example.library_management_system.helper.InsertDataIntoFirestore
@@ -16,7 +17,7 @@ class PayActivity : AppCompatActivity() {
 		setContentView(R.layout.pay_activity)
 
 		findViewById<MaterialButton>(R.id.pay_button).setOnClickListener {
-			InsertDataIntoFirestore().cleanUserAccount(intent.getStringExtra("Name").toString())
+			InsertDataIntoFirestore.cleanUserAccount(intent.getStringExtra("Name").toString())
 			super.onBackPressed()
 		}
 
@@ -34,6 +35,7 @@ class PayActivity : AppCompatActivity() {
 					count++
 				}
 			}
+			InsertDataIntoFirestore.setFine(count * 100)
 			findViewById<TextInputEditText>(R.id.pay_fine).setText((count * 100).toString())
 			return@addOnSuccessListener
 		}

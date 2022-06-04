@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.library_management_system.R
+import com.example.library_management_system.helper.InsertDataIntoFirestore
 import com.example.library_management_system.model.User
 import com.example.library_management_system.view.admin.AdminHome
 import com.example.library_management_system.view.librarian.LibrarianHome
@@ -115,6 +116,7 @@ class LoginActivity : AppCompatActivity() {
 															startActivity(intent)
 														} else {
 															// Launch Activity of User
+															InsertDataIntoFirestore.setUser(db1[0].get("Name").toString())
 															val intent =
 																Intent(this, UserHome::class.java)
 															db.collection("Users")

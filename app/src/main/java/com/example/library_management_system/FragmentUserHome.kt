@@ -6,9 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
+import com.example.library_management_system.helper.InsertDataIntoFirestore
 import com.example.library_management_system.view.user.PayActivity
+import com.example.library_management_system.view.user.ViewBooks
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import org.w3c.dom.Text
@@ -51,14 +55,23 @@ class FragmentUserHome : Fragment() {
 		db.collection("Account").document(activity?.intent?.getStringExtra("Name").toString()).get().addOnSuccessListener { task ->
 			val map = task.get("Borrowed Books") as Map<*, *>
 			val returnBooks =  task.get("Total Books Ordered").toString().toInt()
-			getView()?.findViewById<TextView>(R.id.returnedBooks)?.text = (returnBooks - map.size).toString()
 			getView()?.findViewById<TextView>(R.id.issuedBooks)?.text = map.size.toString()
+			getView()?.findViewById<TextView>(R.id.returnedBooks)?.text = task.get("Total Books Returned").toString()
 		}
 
 		getView()?.findViewById<CardView>(R.id.info_user)?.setOnClickListener {
 			val intent = Intent(getView()?.context, PayActivity::class.java)
 			intent.putExtra("Name", activity?.intent?.getStringExtra("Name").toString())
 			startActivity(intent)
+		}
+
+		getView()?.findViewById<Button>(R.id.view_books)?.setOnClickListener {
+			if (InsertDataIntoFirestore.getFine() <= 200) {
+				val intent = Intent(getView()?.context, ViewBooks::class.java)
+				startActivity(intent)
+			} else {
+				Toast.makeText(getView()?.context, "First, Pay Fine", Toast.LENGTH_SHORT).show()
+			}
 		}
 	}
 

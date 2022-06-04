@@ -16,13 +16,13 @@ class UserHome : AppCompatActivity() {
 
 		replaceFragment(FragmentUserHome())
 
-		findViewById<BottomNavigationView>(R.id.bottomNavigationView).setOnItemSelectedListener { item ->
-			when(item.itemId) {
-				R.id.user_fragment_home -> replaceFragment(FragmentUserHome())
-				R.id.user_fragment_books -> replaceFragment(FragmentUserBook())
-				else -> return@setOnItemSelectedListener false
-			}
-		}
+//		findViewById<BottomNavigationView>(R.id.bottomNavigationView).setOnItemSelectedListener { item ->
+//			when(item.itemId) {
+//				R.id.user_fragment_home -> replaceFragment(FragmentUserHome())
+//				R.id.user_fragment_books -> replaceFragment(FragmentUserBook())
+//				else -> return@setOnItemSelectedListener false
+//			}
+//		}
 	}
 
 	override fun onStart() {
